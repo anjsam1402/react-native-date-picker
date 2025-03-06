@@ -32,8 +32,13 @@ public class Utils {
         if(dateString == null) return null;
         try {
             Calendar calendar = Calendar.getInstance(timeZone);
-            calendar.setTime(getIsoUTCFormat().parse(dateString));
-            return calendar;
+            // Check if the string is a numeric timestamp (positive or negative)
+            if (dateString.matches("-?\\d+")) {  // Matches both positive and negative numbers
+                long timestamp = Long.parseLong(dateString);
+                calendar.setTimeInMillis(timestamp);
+            } else {
+                calendar.setTime(getIsoUTCFormat().parse(dateString));
+            }
         } catch (ParseException e) {
             e.printStackTrace();
             return null;
