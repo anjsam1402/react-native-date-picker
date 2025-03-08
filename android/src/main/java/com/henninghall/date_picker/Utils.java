@@ -39,6 +39,7 @@ public class Utils {
             } else {
                 calendar.setTime(getIsoUTCFormat().parse(dateString));
             }
+            return calendar;
         } catch (ParseException e) {
             e.printStackTrace();
             return null;
